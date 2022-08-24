@@ -1,6 +1,24 @@
 from tkinter import Tk, Button,Label,Scrollbar,Listbox,StringVar,Entry,W,E,N,S,END
 from tkinter import ttk
 from tkinter import messagebox
+from sqlserver_config import dbConfig
+import pypyodbc as pyo
+
+con = pyo.connect(**dbConfig)
+print(con)
+
+cursor = con.cursor()
+
+
+class Bookdb:
+    def __init__(self):
+        self.con = pyo.connect(**dbConfig)
+        self.cursor = con.cursor()
+        print("You have connected to the database")
+        print(con)
+
+    def __del__(self):
+        self.con.close()
 
 root = Tk() # Creates application window
 
